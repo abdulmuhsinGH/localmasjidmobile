@@ -1,27 +1,16 @@
-# README #
+# localmasjidmobile
 
-A mobile app to help muslims find masjids near them. Build with [NativeScript](https://www.nativescript.org)
+A new Flutter project.
 
-### What is this repository for? ###
+## Getting Started
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+This project is a starting point for a Flutter application.
 
-### How do I get set up? ###
+A few resources to get you started if this is your first Flutter project:
 
-* Download repository or clone it
-* Navitage to the folder using CMD or terminal
-* Run ```tns install```
-* Run ```tns run android```
+- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
 
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Abdul Muhsin Iddris
-* Other community or team contact
+For help getting started with Flutter, view our 
+[online documentation](https://flutter.io/docs), which offers tutorials, 
+samples, guidance on mobile development, and a full API reference.
