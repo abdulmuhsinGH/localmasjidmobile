@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import './MapView.dart' as MapView;
+import './ListView.dart' as MasjidListView;
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -26,12 +29,30 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin  {
   int _counter = 0;
+  final  myTabs = <Tab>[
+      Tab(icon:Icon(Icons.location_on)),
+      Tab(icon:Icon(Icons.format_list_bulleted)),
+    ];
+
+  TabController _tabController;
+  //Tab
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(vsync: this, length: myTabs.length);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   void _incrementCounter() {
     setState(() {
-      
       _counter++;
     });
   }
@@ -42,28 +63,38 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         
         title: Text(widget.title),
-      ),
-      body: Center(
-        
-        child: Column(
-          
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: myTabs,
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), 
+      body: TabBarView(
+        controller: _tabController,
+        children: <Widget>[
+          MapView.MapView(),
+          MasjidListView.MasjidListView()
+        ],
+      ) 
     );
   }
 }
+
+/* class MapView extends State {
+  MapView({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Locate Masjid',
+      theme: ThemeData(
+        
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: 'Locate Masjid'),
+    );
+  }
+} */
