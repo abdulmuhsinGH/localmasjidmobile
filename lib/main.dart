@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './MapView.dart' as MapView;
-import './ListView.dart' as MasjidListView;
+import './src/ui/MapView.dart' as MapView;
+import './src/ui/ListView.dart' as MasjidListView;
 
 void main() => runApp(MyApp());
 
@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Locate Masjid',
       theme: ThemeData(
-        
-        primarySwatch: Colors.blue,
+        backgroundColor: Colors.white,
+        primarySwatch: Colors.green,
       ),
       home: MyHomePage(title: 'Locate Masjid'),
     );
@@ -30,7 +30,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin  {
-  int _counter = 0;
+  //int _counter = 0;
   final  myTabs = <Tab>[
       Tab(icon:Icon(Icons.location_on)),
       Tab(icon:Icon(Icons.format_list_bulleted)),
@@ -51,11 +51,11 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
     super.dispose();
   }
 
-  void _incrementCounter() {
+  /* void _incrementCounter() {
     setState(() {
-      _counter++;
+      //_counter++;
     });
-  }
+  } */
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +69,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
         ),
       ),
       body: TabBarView(
+        physics: NeverScrollableScrollPhysics(),
         controller: _tabController,
         children: <Widget>[
           MapView.MapView(),

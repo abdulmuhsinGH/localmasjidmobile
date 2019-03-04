@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -15,16 +17,15 @@ class MapView extends StatefulWidget {
 class _MapViewState extends State<MapView> {
    Completer<GoogleMapController> _controller = Completer();
 
+   //Location myUserLocation;
+
   static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
+    target: LatLng(32.080664, 34.9563837),
   );
 
   static final CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+      target: LatLng(32.080664, 34.9563837),
+  );
   
   @override
   void initState() {
@@ -32,14 +33,18 @@ class _MapViewState extends State<MapView> {
     //_tabController = TabController(vsync: this, length: 2);
   }
 
-
-  @override
+  
+  
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       body: GoogleMap(
         mapType: MapType.hybrid,
         initialCameraPosition: _kGooglePlex,
+        myLocationEnabled: true,
+        zoomGesturesEnabled: true,
+        scrollGesturesEnabled: true,
+        //gestureRecognizers: Set()..add(Factory<OneSequenceGestureRecognizer>(() => PanGestureRecognizer())),
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
         },
