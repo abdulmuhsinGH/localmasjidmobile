@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+//import 'package:async/async.dart';
 
 import './src/ui/MapView.dart' as MapView;
 import './src/ui/ListView.dart' as MasjidListView;
+import './src/blocs/mosque_bloc.dart';
 
 void main() => runApp(MyApp());
 
@@ -43,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
   void initState() {
     super.initState();
     _tabController = TabController(vsync: this, length: myTabs.length);
+    //locateUser();
   }
 
   @override
@@ -59,6 +62,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
+    //bloc.fetchNearestMosques();
     return Scaffold(
       appBar: AppBar(
         

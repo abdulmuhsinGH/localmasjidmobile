@@ -3,7 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
+import '../models/mosque_model.dart';
+import '../blocs/mosque_bloc.dart';
 
 class MapView extends StatefulWidget {
   MapView({Key key, this.title}) : super(key: key);
@@ -21,15 +22,13 @@ class _MapViewState extends State<MapView> {
 
   static final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(32.080664, 34.9563837),
-  );
-
-  static final CameraPosition _kLake = CameraPosition(
-      target: LatLng(32.080664, 34.9563837),
+    zoom:11
   );
   
   @override
   void initState() {
     super.initState();
+    
     //_tabController = TabController(vsync: this, length: 2);
   }
 
@@ -37,7 +36,8 @@ class _MapViewState extends State<MapView> {
   
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    //bloc.fetchNearestMosques();
+    return Scaffold(
       body: GoogleMap(
         mapType: MapType.hybrid,
         initialCameraPosition: _kGooglePlex,
@@ -45,20 +45,28 @@ class _MapViewState extends State<MapView> {
         zoomGesturesEnabled: true,
         scrollGesturesEnabled: true,
         //gestureRecognizers: Set()..add(Factory<OneSequenceGestureRecognizer>(() => PanGestureRecognizer())),
-        onMapCreated: (GoogleMapController controller) {
+        onMapCreated: (GoogleMapController controller) async {
+          bloc.fetchNearestMosques();
+          var sub = await bloc.allNearestMosques.first;
           _controller.complete(controller);
+          print("map data 0");
+
+          sub.results.forEach((result)=>{
+            controller.addMarker(
+              MarkerOptions(
+                position: LatLng(result.location[1], result.location[0]),
+                infoWindowText: InfoWindowText(result.name, "0.5 miles away"),
+              )
+            ),
+            print(result.name),
+            print(result.location)
+          });
+           
         },
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: Text('To the lake!'),
-        icon: Icon(Icons.directions_walk),
       ),
     );
   }
 
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-  }
+
+  
 }

@@ -4,14 +4,14 @@ class MosqueModel {
   int _total_pages;
   List<_Result> _results = [];
 
-  MosqueModel.fromJson(Map<String, dynamic> parsedJson) {
-    print(parsedJson['results'].length);
+  MosqueModel.fromJson(List<dynamic> parsedJson) {
+   /*  print(parsedJson['results'].length);
     _page = parsedJson['page'];
     _total_results = parsedJson['total_results'];
-    _total_pages = parsedJson['total_pages'];
+    _total_pages = parsedJson['total_pages']; */
     List<_Result> temp = [];
-    for (int i = 0; i < parsedJson['results'].length; i++) {
-      _Result result = _Result(parsedJson['results'][i]);
+    for (int i = 0; i < parsedJson.length; i++) {
+      _Result result = _Result(parsedJson[i]);
       temp.add(result);
     }
     _results = temp;
@@ -19,20 +19,20 @@ class MosqueModel {
 
   List<_Result> get results => _results;
 
-  int get total_pages => _total_pages;
+  int get total_pages => _total_pages = 0;
 
-  int get total_results => _total_results;
+  int get total_results => _total_results = 0;
 
-  int get page => _page;
+  int get page => _page = 1 ;
 }
 
 class _Result {
   
-  int _id;
+  String _id;
   String _name;
  // String _description;
-  String _location;
-  String _prayer_times;
+  List<dynamic> _location;
+  List<dynamic> _prayer_times;
   bool _verified;
   String _created_at;
   
@@ -49,13 +49,13 @@ class _Result {
     
   }
 
-  int get id => _id;
+  String get id => _id;
 
   String get name => _name;
 
   //String get description => _description;
 
-  String get location => _location;
+  List<dynamic> get location => _location;
   bool get verified => _verified;
   String get created_at  => _created_at;
 

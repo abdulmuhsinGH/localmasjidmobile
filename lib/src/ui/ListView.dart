@@ -26,6 +26,7 @@ class _MasjidListViewState extends State<MasjidListView> {
   @override
   Widget build(BuildContext context) {
     bloc.fetchNearestMosques();
+    
     return new Scaffold(
       body: StreamBuilder(
         stream: bloc.allNearestMosques,

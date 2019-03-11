@@ -16,6 +16,8 @@ class MosqueBloc {
   dispose() {
     _mosquesFetcher.close();
   }
+
+  
 }
 
 final bloc = MosqueBloc();
