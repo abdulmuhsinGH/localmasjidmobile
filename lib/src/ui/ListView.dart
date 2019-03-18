@@ -25,11 +25,11 @@ class _MasjidListViewState extends State<MasjidListView> {
 
   @override
   Widget build(BuildContext context) {
-    bloc.fetchNearestMosques();
+    mosqueBloc.fetchNearestMosques();
     
     return new Scaffold(
       body: StreamBuilder(
-        stream: bloc.allNearestMosques,
+        stream: mosqueBloc.allNearestMosques,
         builder: (context, AsyncSnapshot<MosqueModel> snapshot) {
           if (snapshot.hasData) {
             return buildListView(snapshot);
@@ -50,7 +50,7 @@ class _MasjidListViewState extends State<MasjidListView> {
           return ListTile(
               leading: const Icon(Icons.star),
               title: Text('${snapshot.data.results[index].name}'),
-              subtitle: Text('0.5 miles away'),
+              subtitle: Text('${snapshot.data.results[index].distanceFromUserLocation} Kilometers away'),
               onTap: () { /* react to the tile being tapped */ }
             );
         });

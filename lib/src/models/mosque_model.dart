@@ -1,7 +1,7 @@
 class MosqueModel {
-  int _page;
+  /* int _page;
   int _total_results;
-  int _total_pages;
+  int _total_pages; */
   List<_Result> _results = [];
 
   MosqueModel.fromJson(List<dynamic> parsedJson) {
@@ -12,6 +12,8 @@ class MosqueModel {
     List<_Result> temp = [];
     for (int i = 0; i < parsedJson.length; i++) {
       _Result result = _Result(parsedJson[i]);
+      
+      result.setDistanceFromUserLocation("www");
       temp.add(result);
     }
     _results = temp;
@@ -19,11 +21,11 @@ class MosqueModel {
 
   List<_Result> get results => _results;
 
-  int get total_pages => _total_pages = 0;
+ /*  int get total_pages => _total_pages = 0;
 
   int get total_results => _total_results = 0;
 
-  int get page => _page = 1 ;
+  int get page => _page = 1 ; */
 }
 
 class _Result {
@@ -32,9 +34,10 @@ class _Result {
   String _name;
  // String _description;
   List<dynamic> _location;
-  List<dynamic> _prayer_times;
+  List<dynamic> _prayerTimes;
   bool _verified;
-  String _created_at;
+  String _createdAt;
+  String _distanceFromUserLocation;
   
 
   _Result(result) {
@@ -43,9 +46,10 @@ class _Result {
     _name = result['name'];
    // _description = result['description'];
     _location = result['location'];
-    _prayer_times = result['prayer_times'];
+    _prayerTimes = result['prayer_times'];
     _verified = result['verified'];
-    _created_at = result['created_at'];
+    _createdAt = result['created_at'];
+
     
   }
 
@@ -56,9 +60,14 @@ class _Result {
   //String get description => _description;
 
   List<dynamic> get location => _location;
+  List<dynamic> get prayerTimes => _prayerTimes;
   bool get verified => _verified;
-  String get created_at  => _created_at;
+  String get createdAt  => _createdAt;
+  String get distanceFromUserLocation => _distanceFromUserLocation;
 
+  void setDistanceFromUserLocation(String distance)=>{
+    _distanceFromUserLocation = distance
+  };
 
   
 }

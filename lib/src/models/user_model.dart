@@ -1,15 +1,17 @@
+import 'package:geolocator/geolocator.dart';
+
 class UserModel {
   int _page;
-  int _total_results;
-  int _total_pages;
+  int _totalResults;
+  int _totalPages;
   List<_Result> _results = [];
-   _CurrentLocation _currentLocation;
+  static _CurrentLocation _currentLocation;
 
   UserModel.fromJson(Map<String, dynamic> parsedJson) {
     print(parsedJson['results'].length);
     _page = parsedJson['page'];
-    _total_results = parsedJson['total_results'];
-    _total_pages = parsedJson['total_pages'];
+    _totalResults = parsedJson['total_results'];
+    _totalPages = parsedJson['total_pages'];
     List<_Result> temp = [];
     for (int i = 0; i < parsedJson['results'].length; i++) {
       _Result result = _Result(parsedJson['results'][i]);
@@ -18,15 +20,22 @@ class UserModel {
     _results = temp;
   }
 
+  //UserModel.
+
   List<_Result> get results => _results;
 
-  int get total_pages => _total_pages;
+  int get totalPages => _totalPages;
 
-  int get total_results => _total_results;
+  int get totalResults => _totalResults;
 
   int get page => _page;
 
-  _CurrentLocation get currentLocation => _currentLocation;
+  static _CurrentLocation get currentLocation => _currentLocation;
+
+  static void setCurrentLocation(Position coordinates) {
+    _CurrentLocation currentLocation =_CurrentLocation(coordinates);
+    _currentLocation = currentLocation;
+  }
 }
 
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import './src/ui/MapView.dart' as MapView;
 import './src/ui/ListView.dart' as MasjidListView;
-import './src/blocs/mosque_bloc.dart';
+//import './src/blocs/mosque_bloc.dart';
 
 void main() => runApp(MyApp());
 
