@@ -51,8 +51,8 @@ class _MapViewState extends State<MapView> {
   void googleMapsController(GoogleMapController controller) async {
       _controller.complete(controller);
 
-      mosqueBloc.fetchNearestMosques();
-      var sub = await mosqueBloc.allNearestMosques.first;
+      //mosqueBloc.fetchNearestMosques();
+      var sub = await mosqueBloc.fetchNearestMosques();
       var currentLocation = await Utils.locateUser() ;
       final latLong = LatLng(currentLocation.latitude, currentLocation.longitude);
       CameraUpdate cameraUpdate = CameraUpdate.newLatLngZoom(latLong, 15);

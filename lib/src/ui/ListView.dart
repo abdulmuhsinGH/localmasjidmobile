@@ -15,21 +15,25 @@ class MasjidListView extends StatefulWidget {
 }
 
 class _MasjidListViewState extends State<MasjidListView> {
+
+  //MosqueBloc _mosqueBloc;
    
   @override
   void initState() {
     super.initState();
-    //_tabController = TabController(vsync: this, length: 2);
+    //_mosqueBloc = MosqueBloc();
+
+
   }
 
 
   @override
   Widget build(BuildContext context) {
-    mosqueBloc.fetchNearestMosques();
-    
+   // mosqueBloc.fetchNearestMosques();
+    //print(_mosqueBloc.mosqueModel.toString());
     return new Scaffold(
-      body: StreamBuilder(
-        stream: mosqueBloc.allNearestMosques,
+      body: FutureBuilder(
+        future: mosqueBloc.fetchNearestMosques(),
         builder: (context, AsyncSnapshot<MosqueModel> snapshot) {
           if (snapshot.hasData) {
             return buildListView(snapshot);

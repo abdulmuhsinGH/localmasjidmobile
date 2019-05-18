@@ -12,7 +12,7 @@ class MosqueApiProvider {
 
     final location = await Utils.locateUser();
     final response = await client
-        .get("http://192.168.1.2:3000/api/v1/user/find-mosques?latitude=${location.latitude}&longitude=${location.longitude}");
+        .get("http://192.168.1.3:3000/api/v1/user/find-mosques?latitude=${location.latitude}&longitude=${location.longitude}");
     //print(response.body.toString());
     if (response.statusCode == 200) {
       //print(json.decode(response.body));

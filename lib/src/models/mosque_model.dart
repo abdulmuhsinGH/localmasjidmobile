@@ -13,7 +13,7 @@ class MosqueModel {
     for (int i = 0; i < parsedJson.length; i++) {
       _Result result = _Result(parsedJson[i]);
       
-      result.setDistanceFromUserLocation("www");
+      //result.setDistanceFromUserLocation("www");
       temp.add(result);
     }
     _results = temp;
